@@ -1,0 +1,39 @@
+%!TEX root = ./template-skripsi.tex
+%-------------------------------------------------------------------------------
+%                            	BAB IV
+%               		KESIMPULAN DAN SARAN
+%-------------------------------------------------------------------------------
+
+\chapter{KESIMPULAN DAN SARAN}
+
+\section{Kesimpulan}
+Berdasarkan hasil implementasi dan pengujian terhadap \emph{crawler} terdistribusi. Maka diperoleh kesimpulan seperti berikut:
+
+\begin{enumerate}
+	\item Pembuatan \emph{crawler} terdistribusi dengan menggunakan mekanisme \emph{socket} programming memerlukan pemahaman yang baik terkait jaringan komputer. Karena sering berfokus pada proses komunikasi antar perangkat.
+
+	\item Pembuatan \emph{crawler} terdistribusi memerlukan setidaknya tiga perangkat dengan \emph{public IP address} sebagai pondasi utama komunikasi dapat berjalan dengan sistematis.
+
+	\item Penyimpanan data pada \emph{crawler} terdistribusi menggunakan sqlite3 sebagai \emph{database}-nya. Dan datanya dapat ter-\emph{centralized} pada pengelola \emph{crawler} (klien \emph{public}).
+
+	\item Pengembangan \emph{crawler} terdistribusi menjadikan proses \emph{crawling} yang dilakukan pada peta web dapat lebih cepat untuk mengumpulkan data dalam jumlah yang banyak.
+
+	\item Perbandingan \emph{crawler} individual dengan \emph{crawler} terdistribusi memiliki rasio pengumpulan data lebih besar sekitar 30\% dengan menggunakan \emph{crawler} terdistribusi.
+\end{enumerate}
+
+\clearpage
+\section{Saran}
+Adapun saran untuk penelitian selanjutnya adalah:
+\begin{enumerate} 
+	\item Melanjutkan penelitian dan pengembangan proses \emph{crawling} agar semakin efektif dan masif dalam proses pengumpulan data dari internet. Dapat dengan menggunakan \emph{crawler} dalam jumlah yang masif pula.
+	\item Melanjutkan penelitian menggunakan bahasa lain yang lebih cepat dan efisien dalam melakukan proses komunikasi dan \emph{crawling} seperti bahasa C.
+	\item Melanjutkan penelitian dengan menerapkan \emph{database} NoSQL seperti MongoDB atau mendesain \emph{database} yang lebih efisien dalam mengelola penyimpanan data.
+\end{enumerate}
+
+
+% Baris ini digunakan untuk membantu dalam melakukan sitasi
+% Karena diapit dengan comment, maka baris ini akan diabaikan
+% oleh compiler LaTeX.
+\begin{comment}
+\bibliography{daftar-pustaka}
+\end{comment}

@@ -1,0 +1,277 @@
+%-------------------------------------------------------------------------------
+%                      Template Naskah Skripsi
+%               	Berdasarkan format JTETI FT UGM
+% 						(c) @gunturdputra 2014
+%-------------------------------------------------------------------------------
+
+%Template pembuatan naskah skripsi.
+\documentclass{jtetiskripsi}
+
+%Untuk prefiks pada daftar gambar dan tabel
+\usepackage[titles]{tocloft}
+\renewcommand\cftfigpresnum{Gambar\  }
+\renewcommand\cfttabpresnum{Tabel\   }
+
+%Untuk hyperlink dan table of content
+\usepackage[hidelinks]{hyperref}
+\newlength{\mylenf}
+\settowidth{\mylenf}{\cftfigpresnum}
+\setlength{\cftfignumwidth}{\dimexpr\mylenf+2em}
+\setlength{\cfttabnumwidth}{\dimexpr\mylenf+2em}
+
+%Untuk Bold Face pada Keterangan Gambar
+\usepackage[labelfont=bf]{caption}
+
+%Untuk caption dan subcaption
+\usepackage{caption}
+\usepackage{subcaption}
+
+%pdf
+\usepackage{pdfpages}
+
+%table
+\usepackage{array}
+\usepackage{longtable}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{graphics}
+\usepackage{wrapfig}
+% \usepackage{multirow}
+
+%bibliography
+\usepackage[
+  style=authoryear-icomp,
+  maxcitenames=1,
+  isbn=false,
+  doi=false,
+  url=false,
+  autolang=other,
+  hyperref=true,
+  sortcites=true,
+  bibwarn=true,
+  firstinits=true,
+  autolang=other,
+]{biblatex}
+\DefineBibliographyStrings{english}{%
+  andothers = {dkk\adddot,\addspace},
+}
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+\addbibresource{daftar-pustaka.bib}
+
+%equation
+\usepackage{amsmath}
+
+%algorithm & syntax
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\algnewcommand\algorithmicforeach{\textbf{for each:}}
+\algnewcommand\ForEach{\item[ \algorithmicforeach]}
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\algdef{SE}% flags used internally to indicate we're defining a new block statement
+[STRUCT]% new block type, not to be confused with loops or if-statements
+{Struct}% "\Struct{name}" will indicate the start of the struct declaration
+{EndStruct}% "\EndStruct" ends the block indent
+[1]% There is one argument, which is the name of the data structure
+{\textbf{struct} \textsc{#1}}% typesetting of the start of a struct
+{\textbf{end struct}}% typesetting the end of the struct
+
+%code
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+\makeatletter
+\def\thechapter{\@Roman\c@chapter}
+\AtBeginDocument{%
+  \def\thelstlisting{\@arabic\c@chapter.\@arabic\c@lstlisting}}
+\makeatother
+
+
+%-----------------------------------------------------------------
+%Disini awal masukan untuk data proposal skripsi
+%-----------------------------------------------------------------
+\titleind{Improvisasi Crawling pada Peta Web Menggunakan
+Algoritma Terdistribusi dengan Model Koordinasi Berbasis
+Socket Programming}
+
+\fullname{Muhammad Ridho Rizqillah}
+
+\idnum{1313619033}
+
+\approvaldate{10 Januari 2024}
+
+\degree{Sarjana Ilmu Komputer}
+
+\yearsubmit{2024}
+
+\program{Ilmu Komputer}
+
+\dept{Ilmu Komputer}
+
+\firstsupervisor{Muhammad Eka Suryana, M. Kom.}
+\firstnip{198512232012121002}
+
+\secondsupervisor{Med Irzal, M. Kom.}
+\secondnip{197706152003121001}
+
+%-----------------------------------------------------------------
+%Disini akhir masukan untuk data proposal skripsi
+%-----------------------------------------------------------------
+
+\tolerance=1
+\emergencystretch=\maxdimen{}
+\hyphenpenalty=10000
+\hbadness=10000
+
+\begin{document}
+
+\cover{}
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+%Disini akhir masukan untuk muka skripsi
+%-----------------------------------------------------------------
+% \include{orisinalitas}
+% \include{pengesahan}
+% \includepdf[pages=-]{pdf/Lembar_Pengesahan_Skripsi.pdf}
+\includepdf[pages=-]{pdf/Lembar_Persetujuan_Revisi_Skripsi.pdf}
+\includepdf[pages=-]{pdf/Lembar_Pernyataan.pdf}
+\include{kata-pengantar}
+
+%-----------------------------------------------------------------
+%Disini awal masukan Intisari
+%-----------------------------------------------------------------
+\begin{abstractind}
+
+	\textbf{Muhammad Ridho Rizqillah}. 	\textbf{Improvisasi \emph{Crawling} pada Peta Web Menggunakan
+  Algoritma Terdistribusi dengan Model Koordinasi Berbasis
+  \emph{Socket Programming}}. Skripsi. Program Studi Ilmu Komputer. Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Negeri Jakarta. Januari 2024. Di bawah bimbingan Muhammad Eka Suryana, M. Kom. dan Med Irzal, M. Kom.
+	\vskip5mm
+	
+	Mesin pencari memerlukan jumlah data yang besar untuk berjalan dengan optimal. Data yang besar diperlukan proses \emph{crawling} yang masif. Penelitian ini mencoba meningkatkan efisiensi \emph{crawling} dengan mengimplementasikan \emph{crawler} terdistribusi menggunakan \emph{socket} sebagai media komunikasi antar perangkat. Sistem arsitektur \emph{crawler} terdistribusi mencakup \emph{tracker}, \emph{manager}, dan \emph{client}. Tujuan utamanya adalah untuk meningkatkan efisiensi dan efektivitas \emph{crawling} dengan cara terdistribusi. Hasil akhir dari improvisasi ini menunjukkan peningkatan data sebanyak 30\% secara terdistribusi dengan dua \emph{crawler}, dibanding dengan \emph{crawler} individual. Serta tidak adanya data yang terduplikasi.
+	
+	\bigskip
+	\noindent
+	\textbf{Kata kunci :} \emph{search engine}, \emph{distributed crawler}, \emph{socket programming}, \emph{crawling}.
+\end{abstractind}
+
+\begin{abstracteng}
+	
+	\textbf{Muhammad Ridho Rizqillah}. 	\textbf{Improvisasi \emph{Crawling} pada Peta Web Menggunakan
+  Algoritma Terdistribusi dengan Model Koordinasi Berbasis
+  \emph{Socket Programming}}. Mini Thesis. Computer Science. Faculty of Mathematics and Natural Sciences, State University of Jakarta. January 2024. Under the guidance of Muhammad Eka Suryana, M. Kom. and Med Irzal, M. Kom.
+	\vskip5mm
+	
+	Search engines require large amounts of data to run with optimal. Big data requires a massive crawling process. This research trying to improve crawling efficiency by implementing crawlers distributed using sockets as a communication medium between devices. System Distributed crawler architecture includes tracker, manager, and client. Objective The main thing is to increase the efficiency and effectiveness of crawling by means distributed. The final result of this improvisation shows an increase in data as much as 30\% distributed with two crawlers, compared to a crawler individual. And there is no duplicate data.
+	
+	\bigskip
+	\noindent
+	\textbf{Keyword :} search engine, distributed crawler, socket programming, crawling.
+\end{abstracteng}
+
+
+%-----------------------------------------------------------------
+%Disini akhir masukan Intisari
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+
+
+\singlespacing{}
+\tableofcontents{}
+\addcontentsline{toc}{chapter}{DAFTAR ISI}
+\listoffigures{}
+\addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
+\listoftables{}
+\addcontentsline{toc}{chapter}{DAFTAR TABEL}
+
+\begin{counterpage}
+\end{counterpage}
+%Disini awal masukan untuk Bab
+%-----------------------------------------------------------------
+\onehalfspacing{}
+\include{bab1}
+\include{bab2}
+\include{bab3}
+\include{bab4}
+\include{bab5}
+
+%-----------------------------------------------------------------
+%Disini akhir masukan Bab
+%-----------------------------------------------------------------
+
+
+%-----------------------------------------------------------------
+% Disini awal masukan untuk Daftar Pustaka
+% - Daftar pustaka diambil dari file .bib yang ada pada folder ini
+%   juga.
+% - Untuk memudahkan dalam memanajemen dan menggenerate file .bib
+%   gunakan reference manager seperti Mendeley, Zotero, EndNote,
+%   dll.
+%-----------------------------------------------------------------
+% \bibliography{daftar-pustaka}
+% \bibliographystyle{apalike}
+\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\singlespacing{}
+\printbibliography{}
+
+%-----------------------------------------------------------------
+%Disini akhir masukan Daftar Pustaka
+%-----------------------------------------------------------------
+\include{daftar-riwayat-hidup}
+\include{metadata}
+
+\end{document}

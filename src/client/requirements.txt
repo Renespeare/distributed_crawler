@@ -1,0 +1,12 @@
+beautifulsoup4
+requests
+pandas
+pymysql
+python-dotenv
+psutil
+scikit-learn
+numpy
+pdoc3
+matplotlib
+flask
+cryptography
