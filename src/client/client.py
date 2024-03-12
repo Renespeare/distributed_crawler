@@ -14,9 +14,7 @@ from database.public_client.database import DatabasePublic
 from database.public_client.utils import DatabaseUtils
 
 # Server configuration
-load_dotenv()
-server_addr = os.getenv("TRACKER_ADDRESS")
-SERVER_ADDRESS = server_addr
+SERVER_ADDRESS = '185.227.134.123' # sesuaikan addressnya
 SERVER_PORT = 55555
 manager_address = None
 private_ip = True
@@ -432,7 +430,7 @@ if __name__ == "__main__":
             while True:
                 try:
                     if len(slave_data.queue) != 0:
-                        # load_dotenv()
+                        load_dotenv()
                         db = Database()
                         db.create_tables()
 

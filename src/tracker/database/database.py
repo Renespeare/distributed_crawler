@@ -176,6 +176,6 @@ class Database:
         # db_connection.ping()
         db_cursor = db_connection.cursor()
         query = "INSERT INTO `log_clients` (`address`, `type`, `is_private`) VALUES (?, ?, ?)"
-        db_cursor.execute(query, (address, type, is_private))
+        db_cursor.execute(query, (str(address), type, is_private))
         db_connection.commit()
         db_cursor.close()

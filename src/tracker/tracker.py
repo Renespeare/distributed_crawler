@@ -2,6 +2,7 @@ import socket
 import threading
 import json
 import time
+from database.database import Database
 
 class Client:
     def __init__(self, client_socket, address):
@@ -42,7 +43,11 @@ manager_ready = False
 client_public_ready = False
 client_public_destination = None
 
+db = Database()
+db.create_tables()
+
 def handle_client(client):
+    db_connection = db.connect()
     while True:
         data = client.client_socket.recv(1024)
         if not data:
@@ -54,6 +59,7 @@ def handle_client(client):
         if data_json:
             if client.type is None:
                 client.update_info(data_json['type'], data_json['is_private'])
+                db.insert_log_client(db_connection, client.address, data_json['type'], data_json['is_private'])
                 print(f"Received from {client.address}: {data_json}")
                 global client_public_ready, client_public_destination
                 if client_public_ready == True:
